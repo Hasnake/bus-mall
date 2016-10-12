@@ -30,11 +30,11 @@ You are also responsible for the look and feel of the app, so don't forget a cus
 
 
 ## Technical Requirements
- - New GitHub repo set up, and working on a feature branch
- - Project scaffolding complete, with proper file and folder structure
- - Images have been properly sized for project
- - Object constructor implemented and used properly for creating objects
- - Object literal implemented and used properly for managing the functionality of the app; proper use of methods and properties
+- New GitHub repo set up, and working on a feature branch
+- Project scaffolding complete, with proper file and folder structure
+- Images have been properly sized for project
+- Object constructor implemented and used properly for creating objects
+- Object literal implemented and used properly for managing the functionality of the app; proper use of methods and properties
 
 ## Goals to complete by the start of next lecture
 
@@ -48,4 +48,3 @@ You are also responsible for the look and feel of the app, so don't forget a cus
 - After 15 total clicks, disable any further vote functionality, and display a button for the user to view the results.
 - Upon clicking the 'view results' button, display a list showing each image name and it's corresponding tally of clicks.
 - Don't forget to publish the total amount of clicks (this will be used for a later assignment).
-
