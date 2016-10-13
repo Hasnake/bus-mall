@@ -132,7 +132,7 @@ function changeThePicturesShown(event) {
   localStorage.setItem('imageGallery',toLocalStorage);
   counter += 1;
   console.log(counter);
-  if (counter === 25) {
+  if (counter === 15) {
     rotateImages.removeEventListener('click', changeThePicturesShown);
     for (var j = 0; j < imageGallery.length; j++) {
       var lineElement = document.createElement('li');
