@@ -109,9 +109,9 @@ function displayImage (){   //4. Now Access -- function that displays the pictur
   }
   right.src = imageGallery[rightPicture].filepath;
 
-  imageGallery[rightPicture].howmanytimesDisplayed += 1;
-  imageGallery[centerPicture].howmanytimesDisplayed += 1;
-  imageGallery[leftPicture].howmanytimesDisplayed += 1;
+  imageGallery[rightPicture].howmanytimesDisplayed += 0;
+  imageGallery[centerPicture].howmanytimesDisplayed += 0;
+  imageGallery[leftPicture].howmanytimesDisplayed += 0;
   previousArray.push(leftPicture);
   previousArray.push(centerPicture);
   previousArray.push(rightPicture);
