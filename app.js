@@ -6,7 +6,7 @@
 //a.path to image file.
 //b.image name.
 //c.vote property.
-
+var results = document.getElementById('results');
 //var counter = 0;  //click counter set to 0
 var round = function(number, precision) {
   return parseFloat(number.toFixed(precision));
@@ -28,23 +28,23 @@ var allImages = []; //1. Create empty array
 //All objects in JavaScript are descended from Object;
 //all objects inherit methods and properties from 'Object.prototype'.
 
-function Image (filepath, imgName,votes) {   //2. Constructor : Needs to be capital letter
+function Image (filepath, imgName) {   //2. Constructor : Needs to be capital letter
   this.imgName = imgName;
   this.filepath = filepath;
   this.howmanytimesVoted = 0;
   allImages.push(this);
 }
 //Image.prototype.clickedImage
-//3. Then create Object instances
-Image.prototype.numberOftimesTheImageClicked = function() {
-  for (var i = 0; i < 15; i++) {
-    this.howmanytimesVoted;
-  }
-};
-
-Image.prototype.callAllMethods = function() {
-  this.numberOftimesTheImageClicked();
-};
+// Then create Object instances
+// Image.prototype.numberOftimesTheImageClicked = function() {
+//   for (var i = 0; i < 15; i++) {
+//     this.howmanytimesVoted;
+//   }
+// };
+//
+// Image.prototype.callAllMethods = function() {
+//   this.numberOftimesTheImageClicked();
+// };
 
 new Image ('img/bag.jpg', 'bag');
 new Image ('img/banana.jpg', 'banana');
@@ -67,12 +67,12 @@ new Image ('img/usb.jpg', 'usb');
 new Image ('img/water-can.jpg', 'water-can');
 new Image ('img/wine-glass.jpg', 'wine-glass');
 
-function makeItAllHappen() {
-  for (var i = 0; i < allImages.length; i++) {
-    allImages[i].callAllMethods();
-  }
-}
-makeItAllHappen();
+// function makeItAllHappen() {
+//   for (var i = 0; i < allImages.length; i++) {
+//     allImages[i].callAllMethods();
+//   }
+// }
+// makeItAllHappen();
 
 //Object litral
 var productImage = {
@@ -122,6 +122,7 @@ function displayImage (){   //4. Now Access -- function that displays the pictur
 
   }
   leftImg.src = allImages[leftPicture].filepath;
+  leftImg.alt = pictureOne.imgName;
 
   var centerPicture = randomInteger();
   while (centerPicture === displayImageArray[0] || centerPicture === displayImageArray[1] || centerPicture === displayImageArray[2] || centerPicture === leftPicture)
@@ -130,6 +131,7 @@ function displayImage (){   //4. Now Access -- function that displays the pictur
     centerPicture = randomInteger();//This is index.
   }
   centerImg.src = allImages[centerPicture].filepath;
+  centerImg.alt = pictureTwo.imgName;
 
   var rightPicture = randomInteger();
   while (rightPicture === displayImageArray[0] || rightPicture === displayImageArray[1] || rightPicture === displayImageArray[2]
@@ -139,20 +141,48 @@ function displayImage (){   //4. Now Access -- function that displays the pictur
     rightPicture = randomInteger();//This is index.
   }
   rightImg.src = allImages[rightPicture].filepath;
+  rightImg.alt = pictureThree.imgName;
   displayImageArray.push(leftPicture,centerPicture,rightPicture);
 }
 displayImage();
-
-var rotateImages = document.getElementById('wrapper');
-rotateImages.addEventListener('click',changeThePicturesShown);
+var changeImages = document.getElementById('wrapper');
+changeImages.addEventListener('click',changeThePicturesShown);
+reset.addEventListener('click',resetImageGallery);
+refresh.addEventListener('click',refreshPage);
+function resetImageGallery(){
+  allImages.clear();
+}
+function refreshPage(){
+  location.reload();
+}
 function changeThePicturesShown(event){
+  console.log(event.target.alt);
   if (event.target.id === 'wrapper'){
     alert('Please click on an image.');
   }
-  for (var i = 0; i < allImages.length; i++) {
+  for (var i = 0; i < 15; i++) {
     if(event.target.alt === allImages[i].imgName) {
-      allImages[i].votes += 1;
+      allImages[i].howmanytimesVoted += 1;
       displayImage();
+    }
+  }
+  var counter = 0;
+  if (counter === 15) {
+    changeImages.removeEventListener('click', changeThePicturesShown);
+    for (var j = 0; j < 15; j++) {
+      var listElement = document.createElement('li');
+      listElement.textContent = allImages[j].imgName + allImages[j].howmanytimesVoted;
+      results.appendChild(listElement);
+      canvas.appendChild(results);
+      unOrderedListData();
+      var imgName = [];
+      var clicked = [];
+      function unOrderedListData(){
+        for (var i = 0; i < 15; i++) {
+          imgName[i] = allImages[i].imgName;
+          clicked[i] = allImages[i].howmanytimesVoted;
+        }
+      }
     }
   }
 }
