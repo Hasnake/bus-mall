@@ -144,6 +144,7 @@ function displayImage (){   //4. Now Access -- function that displays the pictur
   rightImg.alt = pictureThree.imgName;
   displayImageArray.push(leftPicture,centerPicture,rightPicture);
 }
+
 displayImage();
 var changeImages = document.getElementById('wrapper');
 changeImages.addEventListener('click',changeThePicturesShown);
