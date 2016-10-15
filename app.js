@@ -113,7 +113,7 @@ rightImg.src = pictureThree.filepath;
 rightImg.alt = pictureThree.imgName;
 //Avoid duplication of images.
 function displayImage (){   //4. Now Access -- function that displays the pictures on page
-//don't show any duplicate code!
+  //don't show any duplicate code!
   var displayImageArray = [];
   var leftPicture = randomInteger();
   while (leftPicture === displayImageArray[0] || leftPicture === displayImageArray[1] || leftPicture === displayImageArray[2])
@@ -142,3 +142,17 @@ function displayImage (){   //4. Now Access -- function that displays the pictur
   displayImageArray.push(leftPicture,centerPicture,rightPicture);
 }
 displayImage();
+
+var rotateImages = document.getElementById('wrapper');
+rotateImages.addEventListener('click',changeThePicturesShown);
+function changeThePicturesShown(event){
+  if (event.target.id === 'wrapper'){
+    alert('Please click on an image.');
+  }
+  for (var i = 0; i <= 15; i++) {
+    if(event.target.alt === allImages[i].imgName) {
+      allImages[i].votes += 1;
+      displayImage();
+    }
+  }
+}
