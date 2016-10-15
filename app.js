@@ -149,7 +149,7 @@ function changeThePicturesShown(event){
   if (event.target.id === 'wrapper'){
     alert('Please click on an image.');
   }
-  for (var i = 0; i <= 15; i++) {
+  for (var i = 0; i < allImages.length; i++) {
     if(event.target.alt === allImages[i].imgName) {
       allImages[i].votes += 1;
       displayImage();
