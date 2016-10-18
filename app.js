@@ -75,22 +75,22 @@ new Image ('img/wine-glass.jpg', 'wine-glass');
 // makeItAllHappen();
 
 //Object litral
-var productImage = {
-  name: 'image Name',
-  numberOfClicksOnTheImage: 0,
-};
+// var productImage = {
+//   name: 'image Name',
+//   numberOfClicksOnTheImage: 0,
+// };
 
-productImage.nameOftheImage = function() {
-  for (var i = 0; i < allImages.length; i++) {
-    this.dailyTotalBeans += allImages[i].totalBeansPerDay;
-  }
-};
-
-function productImageAllMethods() {
-  productImage.nameOftheImage();
-  //all methods here.
-}
-productImageAllMethods();
+// productImage.nameOftheImage = function() {
+//   for (var i = 0; i < allImages.length; i++) {
+//     this.dailyTotalBeans += allImages[i].totalBeansPerDay;
+//   }
+// };
+//
+// function productImageAllMethods() {
+//   productImage.nameOftheImage();
+//   //all methods here.
+// }
+// productImageAllMethods();
 
 //Rendering a table is building the HTML page in javascript and then inserted it into the DOM.
 // Document object Model specifies the browser should create a model of an HTML page and how javascript can access
@@ -151,7 +151,7 @@ changeImages.addEventListener('click',changeThePicturesShown);
 reset.addEventListener('click',resetImageGallery);
 refresh.addEventListener('click',refreshPage);
 function resetImageGallery(){
-  allImages.clear();
+  localStorage.clear();
 }
 function refreshPage(){
   location.reload();
