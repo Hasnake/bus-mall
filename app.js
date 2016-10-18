@@ -18,7 +18,7 @@ var allImages = [];
 var Image = function(imgName,filepath) {   //2. Constructor : Needs to be capital letter
   this.imgName = imgName;
   this.filepath = filepath;
-  this.howmanytimesVoted = 0;
+  this.votes = 0;
   this.displayedImage = 0;
   allImages.push(this);
 };
@@ -95,8 +95,8 @@ function resultsRender(){
 
   for (var i = 0; i < allImages.length; i++) {
     var liEl = document.createElement('li');
-    liEl.setAttribute('class', 'images');
-    liEl.textContent = 'You voted for ' + allImages[i].imgName + ' a total of ' + allImages[i].votes + ' times.';
+    liEl.setAttribute('class', 'products');
+    liEl.textContent = allImages[i].imgName + ' is voted ' + allImages[i].votes + ' times.';
     ulEl.appendChild(liEl);
   }
   var refresh = document.createElement('button');
