@@ -1,6 +1,6 @@
 'use strict';
-var results = document.getElementById('results');
-var clicks = document.getElementById('img container');
+
+var clicks = document.getElementById('wrapper');
 var results = document.getElementById('edit');
 var refresh = document.getElementById('refreshPage');
 var clickTotal = [];
@@ -15,13 +15,13 @@ var filepath = ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg
 
 var allImages = [];
 
-function Image (filepath, imgName) {   //2. Constructor : Needs to be capital letter
+var Image = function(imgName,filepath) {   //2. Constructor : Needs to be capital letter
   this.imgName = imgName;
   this.filepath = filepath;
   this.howmanytimesVoted = 0;
   this.displayedImage = 0;
   allImages.push(this);
-}
+};
 
 function createNewImage() {
   for (var i = 0; i < filepath.length; i++){
@@ -64,46 +64,51 @@ function displayImage (){   //4. Now Access -- function that displays the pictur
   rightImg.alt = allImages[rightPictureIndex].imgName;
 }
 displayImage();
-var changeImages = document.getElementById('wrapper');
-changeImages.addEventListener('click',changeThePicturesShown);
-reset.addEventListener('click',resetImageGallery);
-refresh.addEventListener('click',refreshPage);
-function resetImageGallery(){
-  localStorage.clear();
-}
-function refreshPage(){
-  location.reload();
-}
-function changeThePicturesShown(event){
-  console.log(event.target.alt);
-  if (event.target.id === 'wrapper'){
-    alert('Please click on an image.');
-  }
-  for (var i = 0; i < 15; i++) {
-    if(event.target.alt === allImages[i].imgName) {
-      allImages[i].howmanytimesVoted += 1;
-      //clicktotal ++;
-      displayImage();
-    }
-  }
-  var counter = 0;
-  if (counter === 15) {
-    changeImages.removeEventListener('click', changeThePicturesShown);
-    for (var j = 0; j < 15; j++) {
-      var listElement = document.createElement('li');
-      var canvas = document.getElementById('canvas');
-      listElement.textContent = allImages[j].imgName + allImages[j].howmanytimesVoted;
-      results.appendChild(listElement);
-      canvas.appendChild(results);
-      unOrderedListData();
-      var imgName = [];
-      var clicked = [];
-      function unOrderedListData(){
-        for (var i = 0; i < 15; i++) {
-          imgName[i] = allImages[i].imgName;
-          clicked[i] = allImages[i].howmanytimesVoted;
-        }
+
+function handleImgClick(event) {
+  var imgid = event.target.id;
+  var imgAlt = event.target.alt;
+
+  if (imgid === 'wrapper') {
+    alert('Please click on an image to vote!');
+  } else if (clickTotal < 15) {
+    for (var i = 0; i < allImages.length; i++) {
+      if(imgAlt === allImages[i].imgName) {
+        allImages[i].votes += 1;
+        clickTotal++;
+      }
+      if (clickTotal === 15) {
+        document.getElementById('edit');
+        edit.style.visibility = 'visible';
+      } else {
+        document.getElementById('edit');
+        edit.style.visibility = 'hidden';
+        displayImage();
       }
     }
   }
 }
+function resultsRender(){
+  var ulEl = document.createElement('ul');
+  ulEl.setAttribute('id', 'resultList');
+  document.getElementById('productList').appendChild(ulEl);
+
+  for (var i = 0; i < allImages.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.setAttribute('class', 'images');
+    liEl.textContent = 'You voted for ' + allImages[i].imgName + ' a total of ' + allImages[i].votes + ' times.';
+    ulEl.appendChild(liEl);
+  }
+  var refresh = document.createElement('button');
+  refresh.setAttribute('id', 'refresh');
+  refresh.textContent = 'Refresh Page';
+  document.getElementById('buttons').appendChild(refresh);
+  refresh.addEventListener('click', refreshPage);
+}
+
+function refreshPage() {
+  window.location.reload();
+}
+
+clicks.addEventListener('click', handleImgClick);
+results.addEventListener('click', resultsRender);
