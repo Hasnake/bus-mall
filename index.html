@@ -7,40 +7,28 @@
   <link rel="icon"  href="icon.JPG">
 </head>
 <body>
-  <main>
-
+  <header>
     <h1>Welcome to the BusMall Product Survey</h1>
     <h2>Please choose the product that you are most interested to purchase</h2>
-    <div class="buttons">
-      <button id="reset">Reset Counter</button>
-      <button id="refresh">Refresh Page</button>
-    </div>
+  </header>
+  <main>
 
+    <section id="wrapper">
+      <img src=" " id="left"alt=" "  height="300px" width="300px;" />
+      <img src=" " id="center" alt=" "  height="300px" width="300px;"/>
+      <img src=" " id="right" alt=" " height="300px" width="300px;"/>
+    </section>
 
-
-    <div id="wrapper">
-
-      <div id="leftImage">
-        <img src=" " id="left"alt=" "  height="300px" width="300px;" />
-      </div>
-
-      <div id="centerImage">
-        <img src=" " id="center" alt=" "  height="300px" width="300px;"/>
-      </div>
-
-      <div id="rightImage">
-        <img src=" " id="right" alt=" " height="300px" width="300px;"/>
-      </div>
-    </div>
-    <canvas id="canvas" width="800" height="600"></canvas>
-
-    <ul id ="results">
-
-    </ul>
+    <section id="buttons">
+      <button type="button" value="edit" id="edit">View results now</button>
+    </section>
+    <section id="productList">
+    </section>
+    <!--<canvas id="canvas" width="800" height="600"></canvas>-->
   </main>
 </body>
 
-<script src="app.js">
-
+<script type="text/javascript" src "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
 </script>
+<script src="app.js"></script>
 </html>
