@@ -1,77 +1,76 @@
-//'use strict';
-
-var clicks = document.getElementById('wrapper');
-var results = document.getElementById('edit');
-var refresh = document.getElementById('refreshPage');
-var clickTotal = [];
-var itemName = [];
-var clicked = [];
-
-function randomInteger () {
-  return (Math.floor(Math.random() * allImages.length));
-}
-var imgName = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair',
-'cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass',];
-var filepath = ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg','img/breakfast.jpg','img/bubblegum.jpg','img/chair.jpg',
-'img/cthulhu.jpg','img/dog-duck.jpg','img/dragon.jpg','img/pen.jpg','img/pet-sweep.jpg','img/scissors.jpg','img/shark.jpg','img/sweep.jng','img/tauntaun.jpg','img/unicorn.jpg','img/usb.jpg','img/water-can.jpg','img/wine-glass.jpg',];
+'use strict';
 
 var allImages = [];
 
-var Image = function(imgName,filepath) {   //2. Constructor : Needs to be capital letter
+var clicks = document.getElementById('wrapper');
+
+var results = document.getElementById('edit');
+
+var refresh = document.getElementById('refreshPage');
+
+var clickTotal = [];
+
+var itemLabels = [];
+
+var voteLabels = [];
+
+var imgName = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair',
+'cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass',];
+var imgPath = ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg','img/breakfast.jpg','img/bubblegum.jpg','img/chair.jpg',
+'img/cthulhu.jpg','img/dog-duck.jpg','img/dragon.jpg','img/pen.jpg','img/pet-sweep.jpg','img/scissors.jpg','img/shark.jpg','img/sweep.jng','img/tauntaun.jpg','img/unicorn.jpg','img/usb.jpg','img/water-can.jpg','img/wine-glass.jpg',];
+
+var Product = function(imgName, imgPath) {
   this.imgName = imgName;
-  this.filepath = filepath;
+  this.imgPath = imgPath;
   this.votes = 0;
-  this.displayedImage = 0;
+  this.displayed = 0; //need to incorporate this into results list
   allImages.push(this);
 };
 
-function createNewImage() {
-  for (var i = 0; i < filepath.length; i++){
-    new Image(imgName[i], filepath[i]);
+function createNewProduct() {
+  for (var i = 0; i < imgPath.length; i++){
+    new Product(imgName[i], imgPath[i]);
   }
 };
-createNewImage();
+createNewProduct();
 
-//Rendering a table is building the HTML page in javascript and then inserted it into the DOM.
-// Document object Model specifies the browser should create a model of an HTML page and how javascript can access
-// and update the contents of a web page while it is in the browser window.
+function randomIndex() {
+  return Math.floor(Math.random() * allImages.length);
+}
 
-//4. Now Access -- function that displays the pictures on page
+function renderImg() {
+  var index1 = randomIndex();
+  var index2 = randomIndex();
+  var index3 = randomIndex();
 
-function displayImage (){   //4. Now Access -- function that displays the pictures on page
-  //don't show any duplicate code!
-  var leftPictureIndex = randomInteger();
-  var centerPictureIndex = randomInteger();
-  var rightPictureIndex = randomInteger();
-  while (centerPictureIndex === leftPictureIndex)
-  {
-    centerPictureIndex = randomInteger();//This is index.
-
+  while (index2 === index1) {
+    index2 = randomIndex();
   }
-  while (rightPictureIndex === leftPictureIndex || rightPictureIndex === centerPictureIndex)
-  {
-    rightPictureIndex = randomInteger();//This is index.
+
+  while (index3 === index2 || index3 === index1) {
+    index3 = randomIndex();
   }
+
   var leftImg = document.getElementById('left');
-  leftImg.src = allImages[leftPictureIndex].filepath;
-  leftImg.alt = allImages[leftPictureIndex].imgName;
-
+  leftImg.src = allImages[index1].imgPath;
+  leftImg.alt = allImages[index1].imgName;
 
   var centerImg = document.getElementById('center');
-  centerImg.src = allImages[centerPictureIndex].filepath;
-  centerImg.alt = allImages[centerPictureIndex].imgName;
+  centerImg.src = allImages[index2].imgPath;
+  centerImg.alt = allImages[index2].imgName;
 
   var rightImg = document.getElementById('right');
-  rightImg.src = allImages[rightPictureIndex].filepath;
-  rightImg.alt = allImages[rightPictureIndex].imgName;
+  rightImg.src = allImages[index3].imgPath;
+  rightImg.alt = allImages[index3].imgName;
 }
-displayImage();
+
+renderImg();
 
 function handleImgClick(event) {
-  var imgid = event.target.id;
+  var imgId = event.target.id;
   var imgAlt = event.target.alt;
 
-  if (imgid === 'wrapper') {
+  if (imgId === 'wrapper') {
     alert('Please click on an image to vote!');
   } else if (clickTotal < 15) {
     for (var i = 0; i < allImages.length; i++) {
@@ -85,65 +84,51 @@ function handleImgClick(event) {
       } else {
         document.getElementById('edit');
         edit.style.visibility = 'hidden';
-        displayImage();
+        renderImg();
       }
     }
   }
 }
-// function resultsRender(){
-//   var ulEl = document.createElement('ul');
-//   ulEl.setAttribute('id', 'resultList');
-//   document.getElementById('productList').appendChild(ulEl);
-//
-//   for (var i = 0; i < allImages.length; i++) {
-//     var liEl = document.createElement('li');
-//     liEl.setAttribute('class', 'products');
-//     liEl.textContent = allImages[i].imgName + ' is voted ' + allImages[i].votes + ' times.';
-//     ulEl.appendChild(liEl);
-//   }
-//   var refresh = document.createElement('button');
-//   refresh.setAttribute('id', 'refreshPage');
-//   refresh.textContent = 'Refresh Page';
-//   document.getElementById('buttons').appendChild(refresh);
-//   refresh.addEventListener('click', refreshPage);
-// }
 
 
-
-// To create a chart, we need to instantiate the Chart class.
-
-function updateChartData(){
+// update the name & vote data
+function updateChart() {
   for (var i = 0; i < allImages.length; i++) {
-    itemName.push(allImages[i].imgName);
-    clicked.push(allImages[i].votes);
+    itemLabels.push(allImages[i].imgName);
+    voteLabels.push(allImages[i].votes);
   }
 }
-//To create a chart, we need to instantiate the Chart class.
-function makeChart(){
-  updateChartData();
+
+// make the Chart
+function makeChart() {
+  updateChart();
   var ctx = document.getElementById('myChart');
+
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: itemName,
+      labels: itemLabels,
       datasets: [{
-        label: 'BusMall items',
-        data: clicked,
-        backgroundColor: 'rgba(200, 80, 140, 0.4)',
-        borderWidth: 1
+        label: 'BusMall Survey Results',
+        fillColor: 'red',
+        data: voteLabels,
+        backgroundColor:'#00BFD0',
+        borderWidth: 3
       }]
     },
     options: {
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
-          }
-        }]
       }
     }
   });
+  // create refresh button
+  var refresh = document.createElement('button');
+  refresh.setAttribute('id', 'refreshPage');
+  refresh.textContent = 'Refresh Page';
+  document.getElementById('buttons').appendChild(refresh);
+  refresh.addEventListener('click', refreshPage);
 }
+
 function refreshPage() {
   window.location.reload();
 }
