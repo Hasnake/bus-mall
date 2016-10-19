@@ -4,7 +4,7 @@ var allImages = [];
 
 var clicks = document.getElementById('wrapper');
 
-var results = document.getElementById('edit');
+var results = document.getElementById('update');
 
 var refresh = document.getElementById('refreshPage');
 
@@ -23,55 +23,55 @@ var Product = function(imgName, imgPath) {
   this.imgName = imgName;
   this.imgPath = imgPath;
   this.votes = 0;
-  this.displayed = 0; //need to incorporate this into results list
+  this.displayed = 0;
   allImages.push(this);
 };
 
-function createNewProduct() {
+function createNewImage() {
   for (var i = 0; i < imgPath.length; i++){
     new Product(imgName[i], imgPath[i]);
   }
 };
-createNewProduct();
+createNewImage();
 
 function randomIndex() {
   return Math.floor(Math.random() * allImages.length);
 }
 
-function renderImg() {
-  var index1 = randomIndex();
-  var index2 = randomIndex();
-  var index3 = randomIndex();
+function displayImg() {
+  var leftImgIndex = randomIndex();
+  var centerImgIndex = randomIndex();
+  var rightImgIndex = randomIndex();
 
-  while (index2 === index1) {
-    index2 = randomIndex();
+  while (centerImgIndex === leftImgIndex) {
+    centerImgIndex = randomIndex();
   }
 
-  while (index3 === index2 || index3 === index1) {
-    index3 = randomIndex();
+  while (rightImgIndex === centerImgIndex || rightImgIndex === leftImgIndex) {
+    rightImgIndex = randomIndex();
   }
 
   var leftImg = document.getElementById('left');
-  leftImg.src = allImages[index1].imgPath;
-  leftImg.alt = allImages[index1].imgName;
+  leftImg.src = allImages[leftImgIndex].imgPath;
+  leftImg.alt = allImages[leftImgIndex].imgName;
 
   var centerImg = document.getElementById('center');
-  centerImg.src = allImages[index2].imgPath;
-  centerImg.alt = allImages[index2].imgName;
+  centerImg.src = allImages[centerImgIndex].imgPath;
+  centerImg.alt = allImages[centerImgIndex].imgName;
 
   var rightImg = document.getElementById('right');
-  rightImg.src = allImages[index3].imgPath;
-  rightImg.alt = allImages[index3].imgName;
+  rightImg.src = allImages[rightImgIndex].imgPath;
+  rightImg.alt = allImages[rightImgIndex].imgName;
 }
 
-renderImg();
+displayImg();
 
-function handleImgClick(event) {
+function displayImgClick(event) {
   var imgId = event.target.id;
   var imgAlt = event.target.alt;
 
   if (imgId === 'wrapper') {
-    alert('Please click on an image to vote!');
+    alert('you have to click on an image to vote!');
   } else if (clickTotal < 15) {
     for (var i = 0; i < allImages.length; i++) {
       if(imgAlt === allImages[i].imgName) {
@@ -79,12 +79,12 @@ function handleImgClick(event) {
         clickTotal++;
       }
       if (clickTotal === 15) {
-        document.getElementById('edit');
-        edit.style.visibility = 'visible';
+        document.getElementById('update');
+        update.style.visibility = 'visible';
       } else {
-        document.getElementById('edit');
-        edit.style.visibility = 'hidden';
-        renderImg();
+        document.getElementById('update');
+        update.style.visibility = 'hidden';
+        displayImg();
       }
     }
   }
@@ -110,18 +110,22 @@ function makeChart() {
       labels: itemLabels,
       datasets: [{
         label: 'BusMall Survey Results',
-        fillColor: 'red',
         data: voteLabels,
         backgroundColor:'#00BFD0',
-        borderWidth: 3
+        borderWidth: 1
       }]
     },
     options: {
       scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true
+        }]
       }
     }
   });
-  // create refresh button
   var refresh = document.createElement('button');
   refresh.setAttribute('id', 'refreshPage');
   refresh.textContent = 'Refresh Page';
@@ -133,6 +137,6 @@ function refreshPage() {
   window.location.reload();
 }
 
-clicks.addEventListener('click', handleImgClick);
+clicks.addEventListener('click', displayImgClick);
 results.addEventListener('click', makeChart);
 refresh.addEventListener('click', refreshPage);
