@@ -1,9 +1,11 @@
-'use strict';
+//'use strict';
 
 var clicks = document.getElementById('wrapper');
 var results = document.getElementById('edit');
 var refresh = document.getElementById('refreshPage');
 var clickTotal = [];
+var itemName = [];
+var clicked = [];
 
 function randomInteger () {
   return (Math.floor(Math.random() * allImages.length));
@@ -88,27 +90,64 @@ function handleImgClick(event) {
     }
   }
 }
-function resultsRender(){
-  var ulEl = document.createElement('ul');
-  ulEl.setAttribute('id', 'resultList');
-  document.getElementById('productList').appendChild(ulEl);
+// function resultsRender(){
+//   var ulEl = document.createElement('ul');
+//   ulEl.setAttribute('id', 'resultList');
+//   document.getElementById('productList').appendChild(ulEl);
+//
+//   for (var i = 0; i < allImages.length; i++) {
+//     var liEl = document.createElement('li');
+//     liEl.setAttribute('class', 'products');
+//     liEl.textContent = allImages[i].imgName + ' is voted ' + allImages[i].votes + ' times.';
+//     ulEl.appendChild(liEl);
+//   }
+//   var refresh = document.createElement('button');
+//   refresh.setAttribute('id', 'refreshPage');
+//   refresh.textContent = 'Refresh Page';
+//   document.getElementById('buttons').appendChild(refresh);
+//   refresh.addEventListener('click', refreshPage);
+// }
 
+
+
+// To create a chart, we need to instantiate the Chart class.
+
+function updateChartData(){
   for (var i = 0; i < allImages.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.setAttribute('class', 'products');
-    liEl.textContent = allImages[i].imgName + ' is voted ' + allImages[i].votes + ' times.';
-    ulEl.appendChild(liEl);
+    itemName.push(allImages[i].imgName);
+    clicked.push(allImages[i].votes);
   }
-  var refresh = document.createElement('button');
-  refresh.setAttribute('id', 'refresh');
-  refresh.textContent = 'Refresh Page';
-  document.getElementById('buttons').appendChild(refresh);
-  refresh.addEventListener('click', refreshPage);
 }
-
+//To create a chart, we need to instantiate the Chart class.
+function makeChart(){
+  updateChartData();
+  var ctx = document.getElementById('myChart');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: itemName,
+      datasets: [{
+        label: 'BusMall items',
+        data: clicked,
+        backgroundColor: 'rgba(200, 80, 140, 0.4)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+}
 function refreshPage() {
   window.location.reload();
 }
 
 clicks.addEventListener('click', handleImgClick);
-results.addEventListener('click', resultsRender);
+results.addEventListener('click', makeChart);
+refresh.addEventListener('click', refreshPage);
