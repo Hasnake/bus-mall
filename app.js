@@ -2,13 +2,13 @@
 
 var allImages = [];
 
-var clicks = document.getElementById('wrapper');
+var clicksOnImage = document.getElementById('wrapper');//Wrapper is the id for the div that contains the images.
 
 var results = document.getElementById('update');
 
 var refresh = document.getElementById('refreshPage');
 
-var clickTotal = [];
+var numberOfClicks = [];//15 is the total number of clicks to view the vote result.
 
 var itemLabels = [];
 
@@ -19,7 +19,7 @@ var imgName = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair'
 var imgPath = ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg','img/breakfast.jpg','img/bubblegum.jpg','img/chair.jpg',
 'img/cthulhu.jpg','img/dog-duck.jpg','img/dragon.jpg','img/pen.jpg','img/pet-sweep.jpg','img/scissors.jpg','img/shark.jpg','img/sweep.jng','img/tauntaun.jpg','img/unicorn.jpg','img/usb.jpg','img/water-can.jpg','img/wine-glass.jpg',];
 
-var Product = function(imgName, imgPath) { // Constructor : Needs to be capital letter
+var Item = function(imgName, imgPath) { // Constructor : Needs to be capital letter
   //All objects in JavaScript are descended from Object;
  //all objects inherit methods and properties from 'Object.prototype'.
   this.imgName = imgName;
@@ -31,7 +31,7 @@ var Product = function(imgName, imgPath) { // Constructor : Needs to be capital 
 
 function createNewImage() {
   for (var i = 0; i < imgPath.length; i++){
-    new Product(imgName[i], imgPath[i]);
+    new Item(imgName[i], imgPath[i]);
   }
 };
 createNewImage();
@@ -74,13 +74,13 @@ function displayImgClick(event) {
 
   if (imgId === 'wrapper') {
     alert('you have to click on an image to vote!');
-  } else if (clickTotal < 15) {
+  } else if (numberOfClicks < 15) {
     for (var i = 0; i < allImages.length; i++) {
       if(imgAlt === allImages[i].imgName) {
         allImages[i].votes += 1;
-        clickTotal++;
+        numberOfClicks++;
       }
-      if (clickTotal === 15) {
+      if (numberOfClicks === 15) {
         document.getElementById('update');
         update.style.visibility = 'visible';
       } else {
@@ -143,6 +143,6 @@ function refreshPage() {
   window.location.reload();
 }
 
-clicks.addEventListener('click', displayImgClick);
+clicksOnImage.addEventListener('click', displayImgClick);
 results.addEventListener('click', makeChart);
 refresh.addEventListener('click', refreshPage);
