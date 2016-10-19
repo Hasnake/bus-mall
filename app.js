@@ -21,7 +21,7 @@ var imgPath = ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg'
 
 var Item = function(imgName, imgPath) { // Constructor : Needs to be capital letter
   //All objects in JavaScript are descended from Object;
- //all objects inherit methods and properties from 'Object.prototype'.
+  //all objects inherit methods and properties from 'Object.prototype'.
   this.imgName = imgName;
   this.imgPath = imgPath;
   this.votes = 0;
@@ -119,14 +119,16 @@ function makeChart() {
     options: {
       scales: {
         xAxes: [{
-          interval:1,
-          title: 'Items',
+          scaleLabel: {
+            display: true,
+            labelString: 'Item Types'
+          }
         }],
         yAxes: [{
           ticks: {
             max: 4,
             min: 0,
-            stepSize: 1
+            stepSize: 1,
           }
         }]
       }
