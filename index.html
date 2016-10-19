@@ -5,6 +5,7 @@
   <title>Haile BusMall</title>
   <link rel="stylesheet" href="style.css" media="screen" title="no title">
   <link rel="icon"  href="icon.JPG">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
 </head>
 <body>
   <header>
@@ -13,22 +14,20 @@
   </header>
   <main>
 
-    <section id="wrapper">
+    <div id="wrapper">
       <img src=" " id="left"alt=" "  height="300px" width="300px;" />
       <img src=" " id="center" alt=" "  height="300px" width="300px;"/>
       <img src=" " id="right" alt=" " height="300px" width="300px;"/>
-    </section>
+    </div>
 
-    <section id="buttons">
+    <div id="buttons">
       <button type="button" value="edit" id="edit">View results now</button>
-    </section>
-    <section id="productList">
-    </section>
-    <!--<canvas id="canvas" width="800" height="600"></canvas>-->
+    </div>
+    <div id="productList">
+    </div>
+    <canvas id="myChart" width="800" height="600"></canvas>
   </main>
 </body>
 
-<script type="text/javascript" src "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
-</script>
 <script src="app.js"></script>
 </html>
