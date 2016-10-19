@@ -1,7 +1,18 @@
 body
 {
-  background-color: #66ffd9;
-}
+  animation: pulse 5s infinite;
+
+
+  }
+
+  @keyframes pulse {
+    0% {
+      background-color: #FAA0CF;
+    }
+    100% {
+      background-color: #FDDF0A;
+    }
+  }
 
 #wrapper{
   column-count: 3
