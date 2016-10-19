@@ -19,7 +19,9 @@ var imgName = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair'
 var imgPath = ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg','img/breakfast.jpg','img/bubblegum.jpg','img/chair.jpg',
 'img/cthulhu.jpg','img/dog-duck.jpg','img/dragon.jpg','img/pen.jpg','img/pet-sweep.jpg','img/scissors.jpg','img/shark.jpg','img/sweep.jng','img/tauntaun.jpg','img/unicorn.jpg','img/usb.jpg','img/water-can.jpg','img/wine-glass.jpg',];
 
-var Product = function(imgName, imgPath) {
+var Product = function(imgName, imgPath) { // Constructor : Needs to be capital letter
+  //All objects in JavaScript are descended from Object;
+ //all objects inherit methods and properties from 'Object.prototype'.
   this.imgName = imgName;
   this.imgPath = imgPath;
   this.votes = 0;
