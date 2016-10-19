@@ -91,7 +91,7 @@ function displayImgClick(event) {
 }
 
 
-// update the name & vote data
+
 function updateChart() {
   for (var i = 0; i < allImages.length; i++) {
     itemLabels.push(allImages[i].imgName);
@@ -99,7 +99,6 @@ function updateChart() {
   }
 }
 
-// make the Chart
 function makeChart() {
   updateChart();
   var ctx = document.getElementById('myChart');
@@ -118,10 +117,15 @@ function makeChart() {
     options: {
       scales: {
         xAxes: [{
-          stacked: true
+          interval:1,
+          title: 'Items',
         }],
         yAxes: [{
-          stacked: true
+          ticks: {
+            max: 4,
+            min: 0,
+            stepSize: 1
+          }
         }]
       }
     }
