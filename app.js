@@ -6,7 +6,7 @@ var refresh = document.getElementById('refreshPage');
 var clickTotal = [];
 
 function randomInteger () {
-  return (Math.floor(Math.random() * allImages.length));
+  return Math.floor(Math.random() * allImages.length);
 }
 var imgName = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair',
 'cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass',];
