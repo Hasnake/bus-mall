@@ -96,7 +96,7 @@ function resultsRender(){
   for (var i = 0; i < allImages.length; i++) {
     var liEl = document.createElement('li');
     liEl.setAttribute('class', 'images');
-    liEl.textContent = 'You voted for ' + allImages[i].imgName + ' a total of ' + allImages[i].votes + ' times.';
+    liEl.textContent = allImages[i].imgName + ' got a vote ' + allImages[i].votes + ' times.';
     ulEl.appendChild(liEl);
   }
   var refresh = document.createElement('button');
