@@ -10,7 +10,7 @@ var refresh = document.getElementById('refreshPage');
 
 var numberOfClicks = [];//15 is the total number of clicks to view the vote result.
 
-var itemLabels = [];
+var itemLabels = [];//this is for the chart.
 
 var voteLabels = [];
 
