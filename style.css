@@ -1,8 +1,33 @@
 body
 {
-  background-color: blue;
-}
+  animation: pulse 5s infinite;
 
+
+  }
+
+  @keyframes pulse {
+    0% {
+      background-color: #FAA0CF;
+    }
+    100% {
+      background-color: #FDDF0A;
+    }
+  }
+  h1,h2 {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 500%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
 #wrapper{
   column-count: 3
   display:inline-block;
@@ -23,7 +48,12 @@ padding: 10px;
 display: inline-block;
 padding: 10px;
 }
-ul
-{
-  font-size: 16px;
+#buttons {
+    background-color: #4CAF50; /* Green */
+    border-radius: 50%;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration:underline;
+    display: inline-block;
+    font-size: 16px;
 }
